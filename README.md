@@ -42,4 +42,4 @@ If you feel like a challenge…
 2. Dockerize the application to run in a container.
 3. Add protection to the endpoints such that a user can only interact with TODOs that have
 their user associated with them. A super user should be available to interact with all
-TODOs (this can be used in the above front end).
+TODOs (this can be used in the above front end).🐟

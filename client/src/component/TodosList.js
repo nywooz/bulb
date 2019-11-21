@@ -18,6 +18,7 @@ export default class TodosList extends Component {
 
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.todoList = this.todoList.bind(this);
+    this.onFilter = this.onFilter.bind(this);
   }
 
   compareBy(key) {
@@ -45,7 +46,6 @@ export default class TodosList extends Component {
     if (currentSort === "default") nextSort = "down";
     else if (currentSort === "down") nextSort = "up";
     else if (currentSort === "up") nextSort = "default";
-
 
     this.setState({
       [sortKey]: nextSort,
@@ -156,10 +156,56 @@ export default class TodosList extends Component {
     this.setTodos(todoItem);
   };
 
+  geticon = currentSort => {
+    if (currentSort === "default") {
+      return "";
+    } else if (currentSort === "down") {
+      return "🔽";
+    } else if (currentSort === "up") {
+      return "🔼";
+    }
+  };
+
+  onFilter = e => {
+    const value = e.target.value.toLowerCase().trim();
+    const valueLen = value.length;
+
+    // this.state.todosUnsorted;
+    if (valueLen === 0) {
+      this.setState({
+        todos: this.state.todosUnsorted,
+        todo_completed: "default",
+        todo_title: "default",
+        todo_description: "default"
+      });
+    } else {
+      let filteredItems = [...this.state.todosUnsorted];
+      filteredItems = filteredItems.filter(item => {
+        let itemTxt =
+          item.todo_title.toLowerCase() + item.todo_description.toLowerCase();
+        return itemTxt.indexOf(value) !== -1;
+      });
+
+      this.setState({
+        todos: filteredItems,
+        todo_completed: "default",
+        todo_title: "default",
+        todo_description: "default"
+      });
+    }
+  };
+
   render() {
+    const { todo_completed, todo_title, todo_description } = this.state;
+
     return (
       <div>
         <h3>Todos List</h3>
+        <p>
+          search is bringing no results, need a flag that contains lenght >0 in
+          input to flag filtered
+        </p>
+
         <p> 1. Use Typescript if using Javascript</p>
         <p> 2. Dockerize the application to run in a container.</p>
         <p>
@@ -169,15 +215,38 @@ export default class TodosList extends Component {
           the above front end).
         </p>
 
+        <div className="input-group flex-nowrap">
+          <div className="input-group-prepend">
+            <span
+              className="input-group-text"
+              role="img"
+              aria-label="Search icon"
+              aria-labelledby="Search icon"
+            >
+              🔍
+            </span>
+          </div>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search..."
+            aria-label="Search icon"
+            aria-labelledby="Search icon"
+            onChange={this.onFilter}
+          />
+        </div>
+
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead className="thead">
             <tr>
               <th onClick={() => this.onSortChange("todo_completed")}>
-                Completed
+                Completed {this.geticon(todo_completed)}
               </th>
-              <th onClick={() => this.onSortChange("todo_title")}>Title</th>
+              <th onClick={() => this.onSortChange("todo_title")}>
+                Title{this.geticon(todo_title)}
+              </th>
               <th onClick={() => this.onSortChange("todo_description")}>
-                Description
+                Description {this.geticon(todo_description)}
               </th>
 
               <th>Action</th>
