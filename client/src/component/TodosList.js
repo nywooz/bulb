@@ -186,7 +186,10 @@ export default class TodosList extends Component {
   };
 
   onFilter = e => {
-    const value = e.target.value.toLowerCase().trim();
+    const value = e.target.value
+      .toLowerCase()
+      .replace(/\s/g, "")
+      .trim();
     const valueLen = value.length;
 
     // this.state.todosUnsorted;
@@ -222,10 +225,6 @@ export default class TodosList extends Component {
     return (
       <div>
         <h3>Todos List</h3>
-        <p>
-          search is bringing no results, need a flag that contains lenght >0 in
-          input to flag filtered
-        </p>
 
         <p> 1. Use Typescript if using Javascript</p>
         <p> 2. Dockerize the application to run in a container.</p>
