@@ -26,13 +26,12 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 1. Create a TODO RESTful api, each TODO is associated with a user, a basic TODO must contain an optional title and a required description this will allow a consumer to:
 
- 1.1 View the list of all TODOs
- 1.2 View TODOs from a single user
- 1.3 Add, Edit and Delete a TODO
- 1.4 TODO validation by the api should be used were necessary and return relevant error
-messages on failure.
+- [x] View the list of all TODOs
+- [x] View TODOs from a single user
+- [x] Add, Edit and Delete a TODO
+- [x] TODO validation by the api should be used were necessary and return relevant error messages on failure.
 
-The api should be written in Javascript using NodeJS or PHP using Laravel/Lumen
+- [x] The api should be written in Javascript using NodeJS or PHP using Laravel/Lumen
 If you decide to use NodeJs you are allowed to use third party libraries like Express.js
 
 2. Create a simple front end to consume the api that uses React or Vue.js. This does not need to interact with every endpoint but must be able to at least pull the list of all TODOs and perform some filtering/sorting on the frontend. CSS is not required.

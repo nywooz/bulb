@@ -25,7 +25,7 @@ class App extends Component {
               <img src={logo} width="60" height="60" alt="bulbstudios.com" />
             </a>
             <Link to="/" className="navbar-brand">
-              MERN-Stack Todo App
+              To Dos App
             </Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">

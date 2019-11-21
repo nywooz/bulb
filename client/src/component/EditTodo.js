@@ -36,15 +36,22 @@ export default class EditTodo extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { ...newItem } = this.state;
     const that = this;
+    const { ...newItem } = this.state;
+
     axios
       .patch(
-        "http://localhost:3001/todos/" + that.props.match.params.id,
+        "http://localhost:3001/todos/" + this.props.match.params.id,
         newItem
       )
       .then(function(res) {
         console.log(res);
+        that.setState({
+          todo_title: "",
+          todo_description: "",
+          todo_completed: false
+        });
+        that.props.history.push("/");
       })
       .catch(function(err) {
         console.log(err);
@@ -52,22 +59,32 @@ export default class EditTodo extends Component {
       .then(function() {
         // always executed
       });
-    this.props.history.push("/");
-    this.setState({
-      todo_title: "",
-      todo_description: "",
-      todo_completed: false
-    });
+  };
+
+  onDelete = e => {
+    const todoID = this.props.match.params.id;
+    const that = this;
+
+    axios
+      .delete("http://localhost:3001/todos/" + todoID)
+      .then(function(res) {
+        that.props.history.push("/");
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
+      .then(function() {
+        // always executed
+      });
   };
 
   componentDidMount() {
-    const that = this;
     axios
-      .get("http://localhost:3001/todos/" + that.props.match.params.id)
+      .get("http://localhost:3001/todos/" + this.props.match.params.id)
       .then(res => {
         const { todo_title, todo_description, todo_completed } = res.data;
 
-        that.setState({
+        this.setState({
           todo_title: todo_title,
           todo_description: todo_description,
           todo_completed: todo_completed
@@ -122,12 +139,22 @@ export default class EditTodo extends Component {
 
           <br />
 
-          <div className="form-group">
+          <div className="form-group float-right">
             <input
               type="submit"
               value="Update Todo"
-              className="btn btn-primary"
+              className="btn btn-primary px-4"
             />
+          </div>
+
+          <div className="form-group float-right mr-5">
+            <button
+              type="button"
+              className="btn btn-danger px-4"
+              onClick={e => this.onDelete(e)}
+            >
+              Delete
+            </button>
           </div>
         </form>
       </div>

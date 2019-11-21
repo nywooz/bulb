@@ -15,3 +15,7 @@ code {
 .font-strike {
   text-decoration: line-through;
 }
+
+.opacity-4 {
+  opacity: 0.4;
+}

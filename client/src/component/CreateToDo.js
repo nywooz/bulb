@@ -7,7 +7,9 @@ export default class CreateToDo extends Component {
     this.state = {
       todo_title: "",
       todo_description: "",
-      todo_completed: false
+      todo_completed: false,
+      todo_titleValidatnMsg: "",
+      todo_descriptionValidatnMsg: ""
     };
     this.onChangeTodotitle = this.onChangeTodotitle.bind(this);
     this.onChangeTododescription = this.onChangeTododescription.bind(this);
@@ -30,10 +32,10 @@ export default class CreateToDo extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
-    console.log(`Form submitted:`);
-    console.log(`Todo title: ${this.state.todo_title}`);
-    console.log(`Todo description: ${this.state.todo_description}`);
+    const that = this;
+    // console.log(`Form submitted:`);
+    // console.log(`Todo title: ${this.state.todo_title}`);
+    // console.log(`Todo description: ${this.state.todo_description}`);
 
     const { todo_title, todo_description, todo_completed } = this.state;
 
@@ -46,20 +48,52 @@ export default class CreateToDo extends Component {
     axios
       .post("http://localhost:3001/todos/add", newTodo)
       .then(function(res) {
-        console.log(res);
+        // console.log(res);
+        that.setState({
+          todo_title: "",
+          todo_description: "",
+          todo_completed: false,
+          todo_titleValidatnMsg: "",
+          todo_descriptionValidatnMsg: ""
+        });
       })
       .catch(function(err) {
-        console.log(err);
+        // console.log(err);
+        const errors = err.response.data.errors;
+        if (errors) {
+          let errorObj = {};
+
+          if (
+            errors.todo_title &&
+            errors.todo_title.name === "ValidatorError"
+          ) {
+            errorObj.todo_titleValidatnMsg = errors.todo_title.kind;
+          } else {
+            errorObj.todo_titleValidatnMsg = "";
+          }
+
+          if (
+            errors.todo_description &&
+            errors.todo_description.name === "ValidatorError"
+          ) {
+            errorObj.todo_descriptionValidatnMsg = errors.todo_description.kind;
+          } else {
+            errorObj.todo_descriptionValidatnMsg = "";
+          }
+          that.setState(errorObj);
+        } else {
+          that.setState({
+            todo_title: "",
+            todo_description: "",
+            todo_completed: false,
+            todo_titleValidatnMsg: "",
+            todo_descriptionValidatnMsg: ""
+          });
+        }
       })
       .then(function() {
         // always executed
       });
-
-    this.setState({
-      todo_title: "",
-      todo_description: "",
-      todo_completed: false
-    });
   };
 
   render() {
@@ -75,6 +109,10 @@ export default class CreateToDo extends Component {
               value={this.state.todo_title}
               onChange={this.onChangeTodotitle}
             />
+
+            {this.state.todo_titleValidatnMsg ? (
+              <div className="text-danger">Please enter a title.</div>
+            ) : null}
           </div>
           <div className="form-group">
             <label>Description: </label>
@@ -84,13 +122,17 @@ export default class CreateToDo extends Component {
               value={this.state.todo_description}
               onChange={this.onChangeTododescription}
             />
+
+            {this.state.todo_descriptionValidatnMsg ? (
+              <div className="text-danger">Please enter a description.</div>
+            ) : null}
           </div>
 
           <div className="form-group">
             <input
               type="submit"
               value="Create"
-              className="btn btn-primary float-right"
+              className="btn btn-primary float-right px-4"
             />
           </div>
         </form>
