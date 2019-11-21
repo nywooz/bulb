@@ -9,6 +9,7 @@ export default class TodosList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isfiltering: false,
       todosUnsorted: [],
       todos: [],
       todo_completed: "default",
@@ -125,7 +126,11 @@ export default class TodosList extends Component {
   todoList() {
     const that = this;
 
-    if (that.state.todos && that.state.todos.length === 0) {
+    if (
+      that.state.todos &&
+      that.state.todos.length === 0 &&
+      !that.state.isfiltering
+    ) {
       return (
         <tr>
           <td align="center" colSpan="5">
@@ -135,6 +140,20 @@ export default class TodosList extends Component {
                 Create Todo
               </button>
             </Link>
+          </td>
+        </tr>
+      );
+    }
+
+    if (
+      that.state.todos &&
+      that.state.todos.length === 0 &&
+      that.state.isfiltering
+    ) {
+      return (
+        <tr>
+          <td align="center" colSpan="5">
+            No filtered results
           </td>
         </tr>
       );
@@ -173,6 +192,7 @@ export default class TodosList extends Component {
     // this.state.todosUnsorted;
     if (valueLen === 0) {
       this.setState({
+        isfiltering: false,
         todos: this.state.todosUnsorted,
         todo_completed: "default",
         todo_title: "default",
@@ -187,6 +207,7 @@ export default class TodosList extends Component {
       });
 
       this.setState({
+        isfiltering: true,
         todos: filteredItems,
         todo_completed: "default",
         todo_title: "default",
