@@ -43,7 +43,7 @@ export default class Todo extends Component {
           {this.state.isMouseInside ? (
             <button
               type="button"
-              className="btn btn-danger rounded-circle "
+              className="btn btn-sm btn-danger rounded-circle m-0"
               onClick={e => onDelete(e, todo._id)}
             >
               X

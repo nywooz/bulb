@@ -255,7 +255,7 @@ export default class TodosList extends Component {
           />
         </div>
 
-        <table className="table table-striped mt-4">
+        <table className="table table-hover mt-4">
           <thead className="thead">
             <tr>
               <th onClick={() => this.onSortChange("todo_completed")}>
