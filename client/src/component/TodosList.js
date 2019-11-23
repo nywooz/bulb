@@ -153,7 +153,7 @@ export default class TodosList extends Component {
       return (
         <tr>
           <td align="center" colSpan="5">
-            No filtered results
+            No results from filtered
           </td>
         </tr>
       );
@@ -225,16 +225,7 @@ export default class TodosList extends Component {
     return (
       <div>
         <h3>Todos List</h3>
-        <h4>Pending</h4>
-        <p> 1. Dockerize the application to run in a container.</p>
-        <p>
-          2. Add protection to the endpoints such that a user can only interact
-          with TODOs that have their user associated with them. A super user
-          should be available to interact with all TODOs (this can be used in
-          the above front end).
-        </p>
-
-        <div className="input-group flex-nowrap">
+        <div className="input-group flex-nowrap col-md-5  float-md-right p-0">
           <div className="input-group-prepend">
             <span
               className="input-group-text"

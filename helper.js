@@ -1,3 +1,16 @@
+import { WSASYSCALLFAILURE } from "constants";
+
+export function getSampleToDo() {
+  return [
+    {
+      id: 1,
+      titlee: "outdoor",
+      todos: ["Mow the grass", "paint house", "buy shed","clean garden"]
+    }
+  ]
+}
+
+
 export function getNames() {
   return [
     {

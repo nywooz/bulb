@@ -154,23 +154,23 @@ export default class EditTodo extends Component {
               </div>
 
               <br />
-
-              <div className="form-group float-right">
-                <input
-                  type="submit"
-                  value="Update Todo"
-                  className="btn btn-primary px-4"
-                />
-              </div>
-
-              <div className="form-group float-right mr-5">
-                <button
-                  type="button"
-                  className="btn btn-danger px-4"
-                  onClick={e => this.onDelete(e)}
-                >
-                  Delete
-                </button>
+              <div className="row">
+                <div className="col">
+                  <button
+                    type="button"
+                    className="btn btn-danger px-3"
+                    onClick={e => this.onDelete(e)}
+                  >
+                    🗑️ Delete
+                  </button>
+                </div>
+                <div className="col">
+                  <input
+                    type="submit"
+                    value="Update Todo"
+                    className="btn btn-primary px-3 float-right"
+                  />
+                </div>
               </div>
             </div>
           </div>
