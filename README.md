@@ -40,6 +40,4 @@ If you decide to use NodeJs you are allowed to use third party libraries like Ex
 If you feel like a challenge…
 1. Use Typescript if using Javascript
 2. Dockerize the application to run in a container.
-3. Add protection to the endpoints such that a user can only interact with TODOs that have
-their user associated with them. A super user should be available to interact with all
-TODOs (this can be used in the above front end).🐟
+3. Add protection to the endpoints such that a user can only interact with TODOs that have their user associated with them. A super user should be available to interact with all TODOs (this can be used in the above front end).🐟

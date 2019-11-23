@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import AddEditContent from "./EditAddContent";
+
 export default class CreateToDo extends Component {
   constructor(props) {
     super(props);
@@ -100,51 +102,24 @@ export default class CreateToDo extends Component {
     return (
       <div style={{ marginTop: 10 }}>
         <h3>New Todo</h3>
+
         <form onSubmit={this.onSubmit}>
-          <div className="card card bg-light mb-3" style={{}}>
-            <div className="card-body">
-              <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Title </label>
-                <div className="col-sm-10">
-                  <input
-                    placeholder="To do title..."
-                    type="text"
-                    className="form-control"
-                    value={this.state.todo_title}
-                    onChange={this.onChangeTodotitle}
-                  />
-                </div>
-
-                {this.state.todo_titleValidatnMsg ? (
-                  <div className="text-danger">Please enter a title.</div>
-                ) : null}
-              </div>
-              <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Description </label>
-                <div className="col-sm-10">
-                  <input
-                    placeholder="Take a note... "
-                    type="text"
-                    className="form-control"
-                    value={this.state.todo_description}
-                    onChange={this.onChangeTododescription}
-                  />
-                </div>
-
-                {this.state.todo_descriptionValidatnMsg ? (
-                  <div className="text-danger">Please enter a description.</div>
-                ) : null}
-              </div>
-
-              <div className="form-group">
-                <input
-                  type="submit"
-                  value="Create"
-                  className="btn btn-primary float-right px-4"
-                />
-              </div>
+          <AddEditContent
+            todo_title={this.state.todo_title}
+            onChangeTodotitle={this.onChangeTodotitle}
+            todo_description={this.state.todo_description}
+            onChangeTododescription={this.onChangeTododescription}
+            todo_titleValidatnMsg={this.state.todo_titleValidatnMsg}
+            todo_descriptionValidatnMsg={this.state.todo_descriptionValidatnMsg}
+          >
+            <div className="form-group">
+              <input
+                type="submit"
+                value="Create"
+                className="btn btn-primary float-right px-4"
+              />
             </div>
-          </div>
+          </AddEditContent>
         </form>
       </div>
     );
