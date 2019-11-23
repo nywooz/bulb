@@ -103,58 +103,76 @@ export default class EditTodo extends Component {
       <div>
         <h3 align="center">Update Todo</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Title: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.todo_title || ""}
-              onChange={this.onChangeTodotitle}
-            />
-          </div>
-          <div className="form-group">
-            <label>Description: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.todo_description || ""}
-              onChange={this.onChangeTododescription}
-            />
-          </div>
+          <div className="card card bg-light mb-3" style={{}}>
+            <div className="card-body">
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Title </label>
+                <div className="col-sm-10">
+                  <input
+                    placeholder="To do title..."
+                    type="text"
+                    className="form-control"
+                    value={this.state.todo_title}
+                    onChange={this.onChangeTodotitle}
+                  />
+                </div>
 
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              id="completedCheckbox"
-              type="checkbox"
-              name="completedCheckbox"
-              onChange={this.onChangeTodoCompleted}
-              checked={this.state.todo_completed}
-              value={this.state.todo_completed || false}
-            />
-            <label className="form-check-label" htmlFor="completedCheckbox">
-              Completed
-            </label>
-          </div>
+                {this.state.todo_titleValidatnMsg ? (
+                  <div className="text-danger">Please enter a title.</div>
+                ) : null}
+              </div>
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Description </label>
+                <div className="col-sm-10">
+                  <input
+                    placeholder="Take a note... "
+                    type="text"
+                    className="form-control"
+                    value={this.state.todo_description}
+                    onChange={this.onChangeTododescription}
+                  />
+                </div>
 
-          <br />
+                {this.state.todo_descriptionValidatnMsg ? (
+                  <div className="text-danger">Please enter a description.</div>
+                ) : null}
+              </div>
 
-          <div className="form-group float-right">
-            <input
-              type="submit"
-              value="Update Todo"
-              className="btn btn-primary px-4"
-            />
-          </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  id="completedCheckbox"
+                  type="checkbox"
+                  name="completedCheckbox"
+                  onChange={this.onChangeTodoCompleted}
+                  checked={this.state.todo_completed}
+                  value={this.state.todo_completed || false}
+                />
+                <label className="form-check-label" htmlFor="completedCheckbox">
+                  Completed
+                </label>
+              </div>
 
-          <div className="form-group float-right mr-5">
-            <button
-              type="button"
-              className="btn btn-danger px-4"
-              onClick={e => this.onDelete(e)}
-            >
-              Delete
-            </button>
+              <br />
+
+              <div className="form-group float-right">
+                <input
+                  type="submit"
+                  value="Update Todo"
+                  className="btn btn-primary px-4"
+                />
+              </div>
+
+              <div className="form-group float-right mr-5">
+                <button
+                  type="button"
+                  className="btn btn-danger px-4"
+                  onClick={e => this.onDelete(e)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
         </form>
       </div>

@@ -101,39 +101,49 @@ export default class CreateToDo extends Component {
       <div style={{ marginTop: 10 }}>
         <h3>New Todo</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Title: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.todo_title}
-              onChange={this.onChangeTodotitle}
-            />
+          <div className="card card bg-light mb-3" style={{}}>
+            <div className="card-body">
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Title </label>
+                <div className="col-sm-10">
+                  <input
+                    placeholder="To do title..."
+                    type="text"
+                    className="form-control"
+                    value={this.state.todo_title}
+                    onChange={this.onChangeTodotitle}
+                  />
+                </div>
 
-            {this.state.todo_titleValidatnMsg ? (
-              <div className="text-danger">Please enter a title.</div>
-            ) : null}
-          </div>
-          <div className="form-group">
-            <label>Description: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.todo_description}
-              onChange={this.onChangeTododescription}
-            />
+                {this.state.todo_titleValidatnMsg ? (
+                  <div className="text-danger">Please enter a title.</div>
+                ) : null}
+              </div>
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Description </label>
+                <div className="col-sm-10">
+                  <input
+                    placeholder="Take a note... "
+                    type="text"
+                    className="form-control"
+                    value={this.state.todo_description}
+                    onChange={this.onChangeTododescription}
+                  />
+                </div>
 
-            {this.state.todo_descriptionValidatnMsg ? (
-              <div className="text-danger">Please enter a description.</div>
-            ) : null}
-          </div>
+                {this.state.todo_descriptionValidatnMsg ? (
+                  <div className="text-danger">Please enter a description.</div>
+                ) : null}
+              </div>
 
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Create"
-              className="btn btn-primary float-right px-4"
-            />
+              <div className="form-group">
+                <input
+                  type="submit"
+                  value="Create"
+                  className="btn btn-primary float-right px-4"
+                />
+              </div>
+            </div>
           </div>
         </form>
       </div>
